@@ -17,14 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from rest_framework import routers
 from django.urls import path, include
+from users.views import SignupViewset, ContributorViewset
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-router = routers.SimpleRouter()
+router = routers.DefaultRouter()
 
-urlpatterns = [
+urlpatterns = router.urls
+
+urlpatterns += [
     path("admin/", admin.site.urls),
-    path('api/token/', TokenObtainPairView.as_view(), name='obtain_tokens'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='refresh_token'),
-    path('api/', include(router.urls)),
+    path("api-auth/", include('rest_framework.urls', namespace='rest_framework')),
+    path("api/login/", TokenObtainPairView.as_view(), name='obtain_tokens'),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name='refresh_token'),
+    path("api/signup/", SignupViewset.as_view({'post': 'create'}), name='signup'),
 ]
