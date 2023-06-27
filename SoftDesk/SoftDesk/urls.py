@@ -30,5 +30,5 @@ urlpatterns += [
     path("api-auth/", include('rest_framework.urls', namespace='rest_framework')),
     path("api/login/", TokenObtainPairView.as_view(), name='obtain_tokens'),
     path("api/token/refresh/", TokenRefreshView.as_view(), name='refresh_token'),
-    path("api/signup/", SignupViewset.as_view(), name='signup'),
+    path("api/signup/", SignupViewset.as_view({'post': 'create'}), name='signup'),
 ]

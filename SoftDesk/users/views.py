@@ -7,10 +7,10 @@ from .serializers import UserSerializer, ContributorSerializer
 from rest_framework.permissions import AllowAny
 
 User = get_user_model()
-class SignupViewset(generics.CreateAPIView):
+class SignupViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (AllowAny)
+    permission_classes = (AllowAny,)
     
 class ContributorViewset(viewsets.ModelViewSet):
     Contributor.objects.all()

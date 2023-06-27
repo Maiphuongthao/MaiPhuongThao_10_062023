@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
     last_name = CharField(required=True)
 
     class Meta:
-        Model = User
+        model = User
         fields = (
             'id',
             'first_name',
@@ -22,7 +22,6 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'password',
             'is_active',
-            'is_admin',
             'user_contributor',
             'project_created_by'
         )
