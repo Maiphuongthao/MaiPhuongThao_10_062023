@@ -1,11 +1,12 @@
 from .models import Contributor
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator, ValidationError
 from rest_framework.fields import EmailField, CharField
 from django.contrib.auth.hashers import make_password
 from projects.models import Project
 
+User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     
     email = EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])
