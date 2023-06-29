@@ -15,4 +15,5 @@ class SignupViewset(viewsets.ModelViewSet):
 class ContributorViewset(viewsets.ModelViewSet):
     Contributor.objects.all()
     serializer_class = ContributorSerializer
+    
 
