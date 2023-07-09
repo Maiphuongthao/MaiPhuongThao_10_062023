@@ -1,21 +1,31 @@
 from rest_framework import viewsets
 from .models import Project
-from .serializers import ProjectSerializer
+from .serializers import ProjectSerializer, ProjectDetailSerializer
+from .permissons import ProjectPermisson
 from users.models import Contributor
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import response, status
 
 
-class ProjectViewset(viewsets.ModelViewSet):
+class MultipleSerializerMixin:
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve' or self.action == 'create' or self.action == 'update' and self.detail_serializer_class is not None:
+            return self.detail_serializer_class
+        return super().get_serializer_class()
+
+
+class ProjectViewset(MultipleSerializerMixin,viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
-    permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        contributor= Contributor.objects.filter(user=self.request.user)
-        #contributor_query = Project.objects.filter(project_contributor__in = contributor)
-        #author_query = Project.objects.filter(author_user_id = self.request.user)
-        return (Project.objects.filter(project_contributor__in = contributor)&Project.objects.filter(author_user_id = self.request.user).distinct())
+    detail_serializer_class = ProjectDetailSerializer
+    permission_classes = [IsAuthenticated, ProjectPermisson]
     
-    # def update(self, request, *args, **kwargs):
-    #     data = request.data.copy()
-    #     request.data['author_user_id'] = request.user.pk
-    #     serializer = self.serializer_class(data = data)
-    #     return 
+    
+    def get_queryset(self):
+        project_contributor= Contributor.objects.filter(user_id=self.request.user)
+        author_set = Project.objects.filter(author_user_id=self.request.user)
+        contributor_set = Project.objects.filter(project_contributor__in =project_contributor)
+
+        return (author_set | contributor_set)
+    
+    

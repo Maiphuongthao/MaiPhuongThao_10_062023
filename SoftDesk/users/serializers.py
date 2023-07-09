@@ -23,7 +23,10 @@ class UserSerializer(serializers.ModelSerializer):
             'password',
             'is_active',
             'user_contributor',
-            'project_created_by'
+            'project_created_by',
+            'issue_created_by',
+            'issue_assigned_to',
+            'user_comment',
         )
         extra_kwargs = {'password': {'write_only': True}}
     
@@ -39,28 +42,8 @@ class UserSerializer(serializers.ModelSerializer):
 class ContributorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contributor
-        field = (
+        fields = (
             'id',
             'user_id',
             'project_id',
         )
-
-    def validate_user(self, value):
-        # get request user from serializer
-        user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-        if user == value:
-            raise ValidationError("L'auteur du projet ne peut pas être contributeur")
-        return value
-    
-    #write-operations to a nested serializer field :
-   
-    def create(self, validated_data):
-        #getting
-        #https://stackoverflow.com/questions/68113403/assign-pk-form-url-to-models-related-field
-        p_id = self.context['view'].kwargs['pk']
-        project = Project.objects.get(pk=p_id)
-
-        contributor = Contributor.objects.create(
-            user_id = validated_data['user'],
-            project_id=project)
-        return contributor
