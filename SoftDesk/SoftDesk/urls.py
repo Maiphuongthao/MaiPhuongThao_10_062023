@@ -25,9 +25,9 @@ from rest_framework_nested import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = routers.DefaultRouter()
-router.register(r"api/projects", ProjectViewset, basename="projects")
+router.register(r"projects", ProjectViewset, basename="projects")
 
-projects_router = routers.NestedDefaultRouter(router, r"api/projects", lookup="project")
+projects_router = routers.NestedDefaultRouter(router, r"projects", lookup="project")
 projects_router.register(r"users", ContributorViewset, basename="users")
 
 projects_router.register(r"issues", IssuesViewset, basename="issues")
@@ -43,7 +43,7 @@ urlpatterns += [
     path("", include(issues_router.urls)),
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("api/login/", TokenObtainPairView.as_view(), name="obtain_tokens"),
-    path("api/token/refresh/", TokenRefreshView.as_view(), name="refresh_token"),
-    path("api/signup/", SignupViewset.as_view({"post": "create"}), name="signup"),
+    path("login/", TokenObtainPairView.as_view(), name="obtain_tokens"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="refresh_token"),
+    path("signup/", SignupViewset.as_view({"post": "create"}), name="signup"),
 ]
