@@ -25,26 +25,25 @@ from rest_framework_nested import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = routers.DefaultRouter()
-router.register(r'api/projects', ProjectViewset, basename='projects')
+router.register(r"api/projects", ProjectViewset, basename="projects")
 
-projects_router = routers.NestedDefaultRouter(router, r'api/projects', lookup='project')
-projects_router.register(r'users', ContributorViewset, basename='users' )
+projects_router = routers.NestedDefaultRouter(router, r"api/projects", lookup="project")
+projects_router.register(r"users", ContributorViewset, basename="users")
 
-projects_router.register(r'issues', IssuesViewset, basename='issues')
+projects_router.register(r"issues", IssuesViewset, basename="issues")
 
-issues_router = routers.NestedDefaultRouter(projects_router, r'issues', lookup='issue')
-issues_router.register(r'comments', CommentViewset, basename='comments')
-
+issues_router = routers.NestedDefaultRouter(projects_router, r"issues", lookup="issue")
+issues_router.register(r"comments", CommentViewset, basename="comments")
 
 
 urlpatterns = router.urls
 
 urlpatterns += [
-    path('', include(projects_router.urls)),
-    path('', include(issues_router.urls)),
+    path("", include(projects_router.urls)),
+    path("", include(issues_router.urls)),
     path("admin/", admin.site.urls),
-    path("api-auth/", include('rest_framework.urls', namespace='rest_framework')),
-    path("api/login/", TokenObtainPairView.as_view(), name='obtain_tokens'),
-    path("api/token/refresh/", TokenRefreshView.as_view(), name='refresh_token'),
-    path("api/signup/", SignupViewset.as_view({'post': 'create'}), name='signup'),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("api/login/", TokenObtainPairView.as_view(), name="obtain_tokens"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="refresh_token"),
+    path("api/signup/", SignupViewset.as_view({"post": "create"}), name="signup"),
 ]
