@@ -2,7 +2,7 @@ from rest_framework.permissions import BasePermission
 from rest_framework import permissions
 
 
-class ContributorPermisson(BasePermission):
+class CommentPermisson(BasePermission):
     def has_permission(self, request, view):
         return request.user and request.user.is_authenticated
 
@@ -10,4 +10,4 @@ class ContributorPermisson(BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return obj.project_id.author_user_id == request.user
+        return obj.author_user_id == request.user
