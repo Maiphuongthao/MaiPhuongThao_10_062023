@@ -77,10 +77,10 @@ Les points de terminations:
 
 Afin de tester les différentes donctionalités su site: il y a 3 utilisateurs qui sont crées:
 
-| *Identifiant* | *Mot de passe* |
-|---------------|----------------|
-| admin         | Password124    |
-| test1         | Password124    |
-| test2         | Password124    |
+|   *Identifiant*   | *Mot de passe* |
+|-------------------|----------------|
+| admin@admin.com   | Password124    |
+| test1@gmail.com   | Password124    |
+| test2@gmail.com   | Password124    |
 
 
