@@ -80,7 +80,7 @@ Afin de tester les différentes donctionalités su site: il y a 3 utilisateurs q
 |   *Identifiant*   | *Mot de passe* |
 |-------------------|----------------|
 | admin@admin.com   | Password124    |
-| test1@gmail.com   | Password124    |
-| test2@gmail.com   | Password124    |
+| test1@test.com    | Password124    |
+| test2@test.com    | Password124    |
 
 
