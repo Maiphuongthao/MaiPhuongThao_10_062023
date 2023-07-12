@@ -52,7 +52,7 @@ Ou avec la plateforme [Postman](https://www.postman.com/)
 
 Les points de terminations:
 
-| #   | *Point de terminaison d'API*                                              | *Méthode HTTP* | *URL (base: http://127.0.0.1:8000)*       |
+| #   | *Point de terminaison d'API*                                              | *Méthode HTTP* | *URL*       |
 |-----|---------------------------------------------------------------------------|----------------|-------------------------------------------|
 | 1   | Inscription de l'utilisateur                                              | POST           | /signup/                                  |
 | 2   | Connexion de l'utilisateur                                                | POST           | /login/                                   |
