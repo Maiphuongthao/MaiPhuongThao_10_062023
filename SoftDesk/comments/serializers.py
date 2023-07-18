@@ -12,7 +12,7 @@ class CommentSerializer(serializers.ModelSerializer):
             "issue_id",
             "created_time",
         ]
-        read_only_fields = ("created_time",)
+        read_only_fields = ("author_user_id", "created_time", "issue_id")
 
 
 class CommentDetailSerializer(serializers.ModelSerializer):
