@@ -13,5 +13,6 @@ class Comment(models.Model):
     )
     created_time = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self) -> str:
-        return super(self.description).__str__()
+    def __str__(self):
+        return self.description
+
