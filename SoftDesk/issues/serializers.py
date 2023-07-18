@@ -21,8 +21,6 @@ class IssuesSerializer(serializers.ModelSerializer):
             "issue_comment",
         ]
         read_only_fields = (
-            "author_user_id",
-            "project_id",
             "created_time",
         )
 
